@@ -5,20 +5,19 @@ import EventForm from "../eventForm/EventForm";
 import EventList from "./EventList";
 // import {sampleData} from ""
 
-function EventDashboard({ formOpen, setFormOpen, selectEvent, selectedEvent }) {
+function EventDashboard() {
   const [events, setEvents] = useState(sampleData);
 
-  function handleCreateEvent(event) {
-    setEvents([...events, event]);
-  }
+  // function handleCreateEvent(event) {
+  //   setEvents([...events, event]);
+  // }
 
-  function handleUpdateEvent(updatedEvent) {
-    setEvents(
-      events.map((evt) => (evt.id === updatedEvent.id ? updatedEvent : evt))
-    );
-    selectEvent(null);
-    setFormOpen(false);
-  }
+  // function handleUpdateEvent(updatedEvent) {
+  //   setEvents(
+  //     events.map((evt) => (evt.id === updatedEvent.id ? updatedEvent : evt))
+  //   );
+
+  // }
 
   function handleDeleteEvent(event) {
     setEvents(events.filter((evt) => evt.id !== event.id));
@@ -27,23 +26,10 @@ function EventDashboard({ formOpen, setFormOpen, selectEvent, selectedEvent }) {
   return (
     <Grid>
       <Grid.Column width={10}>
-        <EventList
-          events={events}
-          selectEvent={selectEvent}
-          deleteEvent={handleDeleteEvent}
-        />
+        <EventList events={events} deleteEvent={handleDeleteEvent} />
       </Grid.Column>
       <Grid.Column width={6}>
-        {formOpen && (
-          <EventForm
-            setFormOpen={setFormOpen}
-            createEvent={handleCreateEvent}
-            setEvents={setEvents}
-            selectedEvent={selectedEvent}
-            key={selectedEvent ? selectedEvent.id : null}
-            updateEvent={handleUpdateEvent}
-          />
-        )}
+        <h2>Events Filter</h2>
       </Grid.Column>
     </Grid>
   );
